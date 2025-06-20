@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Intron Bot Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>🗣 Intron Translator Bot</h1>
+        <button onclick="startBot()">🚀 Start Bot</button>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h1>Welcome to the Intron Speech Translator</h1>
+            <p>This bot translates English to an African or global language and submits it to the Intron platform with voice playback support.</p>
+        </section>
+
+        <div class="grid">
+            <!-- Advantages -->
+            <section>
+                <h2>✅ Advantages</h2>
+                <ul>
+                    <li>Automatic and fast translation</li>
+                    <li>Text-to-Speech audio output</li>
+                    <li>Minimal human intervention</li>
+                    <li>Open source & easy to extend</li>
+                </ul>
+            </section>
+
+            <!-- Disadvantages -->
+            <section>
+                <h2>⚠️ Disadvantages</h2>
+                <ul>
+                    <li>Requires manual login at start</li>
+                    <li>Only works with Chrome + driver</li>
+                    <li>Translation accuracy may vary</li>
+                    <li>Depends on internet connectivity</li>
+                </ul>
+            </section>
+
+            <!-- About & Disclaimer -->
+            <section>
+                <h2>ℹ️ About Us & Disclaimer</h2>
+                <p>We created this bot to assist with translation tasks on the Intron Health platform.</p>
+                <p><strong>Disclaimer:</strong> This tool is not officially affiliated with Intron Health. Use at your own discretion.</p>
+            </section>
+
+            <!-- Instructions & Terms -->
+            <section>
+                <h2>📘 Instructions & Terms</h2>
+                <ul>
+                    <li>Ensure Chrome and ChromeDriver are installed.</li>
+                    <li>Login manually when prompted by the bot.</li>
+                    <li>Follow guidelines when translating and submitting sentences.</li>
+                    <li>By using this bot, you agree to use it responsibly and not for abuse or spam.</li>
+                </ul>
+            </section>
+        </div>
+
+        <!-- Language selection -->
+<div class="bottom-settings">
+    <label for="language">🌍 Choose Target Language:</label>
+    <select id="language">
+        <option value="sw">🇰🇪 Swahili</option>
+        <option value="yo">🇳🇬 Yoruba</option>
+        <option value="zu">🇿🇦 Zulu</option>
+        <option value="am">🇪🇹 Amharic</option>
+        <option value="ha">🇳🇬 Hausa</option>
+        <option value="ig">🇳🇬 Igbo</option>
+        <option value="om">🇪🇹 Oromo</option>
+        <option value="sn">🇿🇼 Shona</option>
+        <option value="st">🇿🇦 Sesotho</option>
+        <option value="rw">🇷🇼 Kinyarwanda</option>
+        <option value="fr">🇫🇷 French</option>
+        <option value="zh-cn">🇨🇳 Chinese</option>
+    </select>
+</div>
+
+        <!-- Bottom Start Button -->
+        <div class="bottom-start">
+            <button onclick="startBot()">🚀 Start Bot</button>
+        </div>
+    </main>
+<!-- Spinner -->
+<div id="spinner" class="spinner-overlay">
+    <div class="spinner"></div>
+    <p>Starting bot, please wait...</p>
+</div>
+
+    <footer>
+        <p>&copy; 2025 Intron Bot Interface. Built by Joseph Musyoka.</p>
+    </footer>
+
+    <script>
+    function startBot() {
+        const lang = document.getElementById("language").value || "sw";
+        const spinner = document.getElementById("spinner");
+        spinner.style.display = "flex";
+
+        fetch('/start', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ language: lang })
+        })
+        .then(response => response.json())
+        .then(data => {
+            spinner.style.display = "none";
+            alert("Bot has started using language: " + data.language.toUpperCase());
+        })
+        .catch(error => {
+            spinner.style.display = "none";
+            alert("Failed to start bot.");
+        });
+    }
+</script>
+
+</body>
+</html>
